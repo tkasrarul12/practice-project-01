@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome - Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://googleapis.com" rel="stylesheet">
+    <style>
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #0f172a, #1e1b4b);
+            font-family: 'Poppins', sans-serif;
+            color: #fff;
+            margin: 0;
+        }
+        .welcome-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+            animation: fadeIn 0.8s ease-out;
+        }
+        .success-icon {
+            font-size: 50px;
+            color: #10b981;
+            margin-bottom: 20px;
+        }
+        h1 { margin-bottom: 10px; font-weight: 600; }
+        p { color: #94a3b8; margin-bottom: 30px; }
+        .logout-btn {
+            background: #ef4444;
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+        .logout-btn:hover { background: #dc2626; transform: translateY(-2px); }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body>
+
+    <div class="welcome-card">
+        <div class="success-icon">✓</div>
+        <h1>Login Successful!</h1>
+        <p>Welcome back, <span id="userName" style="color: #6366f1; font-weight: bold;">User</span>!</p>
+        <button class="logout-btn" id="logoutBtn">Sign Out</button>
+    </div>
+
+    <script>
+
+        document.getElementById('userName').textContent = localStorage.getItem('loggedInUser') || 'User';
+
+        document.getElementById('logoutBtn').addEventListener('click', () => {
+            localStorage.clear();
+            window.location.href = 'index.html';
+        });
+    </script>
+</body>
+</html>
