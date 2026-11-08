@@ -48,10 +48,6 @@ The application has three main parts:
 2. **Backend:** JavaScript sends those details to `auth.php`. PHP checks the input and communicates with the database.
 3. **Database:** MySQL stores the user details in a table named `users`.
 
-For signup, the backend checks the details, makes sure the email is not already in use, hashes the password and saves the new account.
-
-For login, the backend finds the account using the email and checks the entered password against the saved password hash.
-
 ## Project Structure
 
 ```text
@@ -117,23 +113,33 @@ At a high level, the deployment steps are:
 6. Run the application containers and connect them through a Docker network.
 7. Open the application using the EC2 public address and the configured port.
 
-The exact VPC, subnet, security group and port settings can be added here if you want to document the full AWS network setup.
-
 ## Build the Docker Images
 
 Open a terminal in the folder that contains `backend` and `frontend`.
 
-Build the backend image:
-
-```bash
-docker build -t practice-backend ./backend
-```
-
 Build the frontend image:
 
 ```bash
-docker build -t practice-frontend ./frontend
+docker build -t tashaddock/fronti .
 ```
+
+Build the backend image:
+
+```bash
+docker build -t tashaddock/backi .
+```
+
+## Docker Hub Images
+
+I have also built and uploaded the frontend and backend Docker images to Docker Hub.
+
+### Available Docker Hub Images:
+
+- Frontend Image:
+https://hub.docker.com/repository/docker/tashaddock/fronti/general
+
+- Backend Image:
+https://hub.docker.com/repository/docker/tashaddock/backi/general
 
 ## Run the Containers
 
@@ -147,8 +153,6 @@ The current configuration expects:
 Make sure your MySQL and backend containers use those names, or update `DB_HOST` in the backend settings and `fastcgi_pass` in `frontend/nginx.conf` to match your actual container names.
 
 After starting the containers, publish the frontend's port `80` to a port on your machine or server. Then open the frontend address in a browser.
-
-> The exact `docker run` commands depend on the MySQL image, network name, container names and port you choose. Those details were not included in the project information provided, so they are not guessed here.
 
 ## Important Configuration Notes
 
